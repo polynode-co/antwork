@@ -31,7 +31,7 @@ Do **not** call `create_post` during planning.
 
 Once approved, work slot by slot. For each row, before writing copy:
 
-- `get_post_context(platform, account_id)` — brand plus the account's last 15 posts with their engagement. Those posts are the voice: match them, weighting the ones that performed, and don't impose a house style. With several accounts, `get_post_context(account_ids=[...])` loads them all in one call. If an account has no post history, ask the user for 3–5 sample posts before drafting a whole week for it.
+- `get_post_context(platform, account_id)` — brand plus the account's last 15 posts with their engagement. Those posts are the voice: match them, weighting the ones that performed (its `performance.topPosts`, when present, ranks them by the platform's own metric), and don't impose a house style. With several accounts, `get_post_context(account_ids=[...])` loads them all in one call. If an account has no post history, ask the user for 3–5 sample posts before drafting a whole week for it.
 
 A slot for one account is one `create_post`. A slot where the same idea runs on several accounts is one `create_campaign(variants=[...])`, with one variant per account and each variant's copy written for that account. Never send identical text in every variant. There is no multi-platform field on `create_post`.
 
@@ -41,10 +41,12 @@ Respect the hard character limit for each platform (X 280, Threads 500, Pinteres
 
 `create_post` produces a **DRAFT**. It does not put the post on the calendar. For each slot:
 
-1. `create_post(text, account_id, hashtags?, goal?)` → returns `post_id`. For a multi-account slot, `create_campaign(variants=[...])` → returns the `campaign_id` and one post per account.
+1. `create_post(text, account_id, hashtags?, goal?)` → returns `post_id`. For a multi-account slot, `create_campaign(variants=[...])` → returns the `campaign_id` and one post per account. Hashtags go in one place: write them in `text`, or pass them in `hashtags` (no `#`) and the server appends them to the text, where they count toward the character limit. Never both. On YouTube `hashtags` are video tags instead.
 2. `schedule_post(post_id, scheduled_for)` with an ISO 8601 timestamp at the planned slot, or `schedule_post(scheduled_for, campaign_id=...)` to schedule every post of a multi-account slot at once.
 
 **Scheduling reaches at most 30 days ahead.** A "plan my month" can be planned in full, but slots past day 30 stay drafts: say which ones, and schedule them later.
+
+The approved calendar is the user's go-ahead to schedule its slots, so don't stop after each draft to ask publish / schedule / keep as draft. Only ask again if a slot changed from the plan.
 
 Only after `schedule_post` succeeds is the post actually on the calendar. Telling the user "your week is scheduled" after only `create_post` is false.
 

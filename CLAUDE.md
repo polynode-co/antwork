@@ -43,8 +43,8 @@ Applies to every change, by hand or unattended.
   Each time these skills went on naming tools that no longer existed.
 - Facts with a source of truth get checked against it, not memory: character limits live in
   `../antwork.io/src/lib/platforms/common/platform-rules.json`.
-- `clawhub/antwork/SKILL.md` is a self-contained copy of the core rules for OpenClaw's
-  registry. A change to a rule in `skills/` usually needs the same change there.
+- `clawhub/antwork/SKILL.md` is a self-contained copy of the core rules for OpenClaw. It is
+  not listed on ClawHub yet (installed by hand, see README). A change to a rule in `skills/` usually needs the same change there.
 - Adding or renaming a skill means updating **both** `skills/<name>/SKILL.md` and the command
   table in `README.md`. A PR touching only one is incomplete.
 - Adding or removing a skill also means updating the `SKILLS` list in `install.sh` (a removed one

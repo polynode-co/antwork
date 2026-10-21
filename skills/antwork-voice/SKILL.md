@@ -13,7 +13,7 @@ Voice belongs to the **social account**. A founder's personal LinkedIn is not th
 
 ## 1. Load the posts
 
-Call `get_post_context(platform, account_id)`, or `get_post_context(account_ids=[...])` for several accounts in one call. `recentPosts` holds the account's published posts with likes, comments, shares and impressions. Weight the posts that performed: they are the voice the audience responds to.
+Call `get_post_context(platform, account_id)`, or `get_post_context(account_ids=[...])` for several accounts in one call. `recentPosts` holds the account's published posts with likes, comments, shares and impressions. Weight the posts that performed: they are the voice the audience responds to. When present, the `performance` block's `topPosts` rank the account's Antwork-published posts by the metric that matters on its platform (`rankedBy`), a better signal than likes alone.
 
 **No history?** An empty `recentPosts` means there is nothing to imitate. Ask the user to paste 3–5 posts that sound like them (or that they wish they had written) and read those instead. Never invent a voice from nothing.
 

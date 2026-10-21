@@ -41,13 +41,13 @@ Capture the brief in the campaign brief template if the user wants a record of t
 
 Create every variant in one call:
 
-- `create_campaign(variants=[{account_id, text, hashtags?, goal?}, ...])`, one entry per target account, each with its own copy.
+- `create_campaign(variants=[{account_id, text, hashtags?, goal?}, ...])`, one entry per target account, each with its own copy. Hashtags go in one place: write them in `text`, or pass them in `hashtags` (no `#`) and the server appends them to the text, where they count toward the character limit. Never both. On YouTube `hashtags` are video tags instead.
 
 It returns the `campaign_id` and one post per account, so the set can be tracked, compared and cleaned up together. A variant that fails validation is reported with its reason and the others are still created. Shared media goes in `media_urls` on the same call. Everything is still a DRAFT; nothing is live yet.
 
 ## 5. Present, pick, ship
 
-Show the drafts side by side (platform → variant) and let the user edit or drop any before anything goes out. Then per the user's intent:
+Show the drafts side by side (platform → variant) and let the user edit or drop any before anything goes out. Ask once for the whole set (publish now, schedule, or keep as drafts), not once per variant, unless the user already said. Then per the user's intent:
 
 - **Schedule, staggered**: `schedule_post(post_id, scheduled_for)` (ISO 8601) per variant, spread across the day/week using the preferred times from `get_post_context`'s `workspace` block rather than firing all variants at once. At most 30 days ahead.
 - **Schedule, all at one time**: `schedule_post(scheduled_for, campaign_id=...)`.
