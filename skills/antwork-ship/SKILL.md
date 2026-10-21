@@ -82,6 +82,8 @@ A post lands harder with a receipt: the release page, the PR, a screenshot of th
 - **Publish now:** `publish_post(post_id)` or `publish_post(campaign_id=...)`.
 - **Leave as drafts** if the user hasn't said which.
 
+Offer these three once for the whole set, not after each draft.
+
 Report what actually happened. Never say "scheduled" when only drafts exist.
 
 ## Guardrails

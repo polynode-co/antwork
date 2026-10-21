@@ -3,7 +3,9 @@
 **Date:** `<YYYY-MM-DD>`  ·  **Range covered:** `<last N days / date_from–date_to>`  ·  **Accounts:** `<platforms>`
 
 > Numbers are lifetime/period totals from Antwork as of the date above. Stored
-> metrics refresh every 6 hours.
+> metrics refresh every 6 hours. "n/r" means the platform did not report that
+> metric for the post (blank, `unsupported`, `never_fetched` or
+> `awaiting_permission`); it is never a zero.
 
 ---
 
@@ -14,24 +16,36 @@ and the one thing to do next.>`
 
 ## Top performers
 
-Ranked by total engagement (`get_performance`).
+Per platform, ranked by the metric that matters there (`get_performance`): saves/shares on
+Instagram, link clicks on Pinterest, watch time on YouTube, views on TikTok, total engagement
+elsewhere. Add only the action columns the platform reports.
 
-| # | Post (excerpt) | Platform | Published | Likes | Comments | Shares | Impressions | Total |
-|---|---|---|---|---|---|---|---|---|
-| 1 | `<...>` | `<...>` | `<date>` | | | | | |
-| 2 | | | | | | | | |
-| 3 | | | | | | | | |
+| # | Post (excerpt) | Platform | Published | Ranked by | Likes | Comments | Shares | Impressions (`reachBasis`) | Link clicks | Profile visits | Follows | Watch time |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | `<...>` | `<...>` | `<date>` | `<metric>` | | | | | | | | |
+| 2 | | | | | | | | | | | | |
+| 3 | | | | | | | | | | | | |
 
 **What the winners share:** `<hook type / topic / format / length / timing pattern>`
 
+## Follower growth
+
+From `get_engagement_history`'s `followers` table (or `list_social_accounts` `followers` for the
+latest count and 30-day change).
+
+| Account | Platform | Start | End | Change | Biggest day (and what went out) |
+|---|---|---|---|---|---|
+| `<name>` | `<...>` | | | `<+N / n/r>` | `<date, +N, post>` |
+
 ## Per-platform trends
 
-From `get_engagement_history` (platformTotals / rangeTotals).
+From `get_engagement_history` (platformTotals / rangeTotals). Compare `impressions` only within
+one `reachBasis`.
 
-| Platform | Posts | Total engagement | Trend | Read |
-|---|---|---|---|---|
-| `<linkedin>` | | | `↑ / ↓ / flat` | `<one line>` |
-| `<x>` | | | | |
+| Platform | Posts | Total engagement | Actions (link clicks / follows) | Trend | Read |
+|---|---|---|---|---|---|
+| `<linkedin>` | | | | `↑ / ↓ / flat` | `<one line>` |
+| `<x>` | | | | | |
 
 ## Recommendations (prioritized)
 
@@ -41,4 +55,7 @@ From `get_engagement_history` (platformTotals / rangeTotals).
 
 ## Notes / caveats
 
-- `<platforms with no posts this period, data gaps, accounts needing reconnection, etc.>`
+- `<metrics not reported per platform and why: Instagram/Threads awaiting Meta's insights review,
+  TikTok scope in review, X without elevated access, YouTube without the Analytics grant>`
+- `<degraded values carried forward, posts too new to have numbers, platforms with no posts
+  this period, accounts needing reconnection>`

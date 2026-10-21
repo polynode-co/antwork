@@ -11,9 +11,8 @@ A comprehensive, data-driven audit of everything the user ships through Antwork.
 
 Before spawning anything, gather the lay of the land so the agents (and the report) reference real accounts and real numbers:
 
-- `list_workspaces` — confirm the default workspace (the user's plan and quota are in its `account` field).
-- `list_workspaces` — if more than one and no default, ask which to audit (or `set_default_workspace`).
-- `list_social_accounts` — the connected platforms, handles, and token health. This is the audit's universe.
+- `list_workspaces` — confirm the default workspace (the user's plan and quota are in its `account` field). If there is more than one and no default, ask which to audit (or `set_default_workspace`).
+- `list_social_accounts` — the connected platforms, handles, token health, and each account's latest `followers` (count and 30-day change). This is the audit's universe.
 - `get_post_context` — its `workspace` block: brand identity, timezone, preferred posting times.
 
 If no accounts are connected, stop: there's nothing to audit yet. Call `get_connection_urls` so the user can connect one.
@@ -26,11 +25,11 @@ Launch all five in a single batch so they run concurrently. Each is read-only an
 
 | Dimension | Agent | Weight | Primary MCP tools |
 |---|---|---|---|
-| Performance | `antwork-performance` | 30% | `get_performance`, `get_engagement_history`, `get_post_context` |
+| Performance | `antwork-performance` | 30% | `get_performance`, `get_engagement_history`, `get_post_context`, `get_post` |
 | Voice Consistency | `antwork-voice-analyst` | 20% | `get_post_context` (per account), `list_posts` |
 | Cadence & Timing | `antwork-cadence` | 20% | `list_posts`, `get_post_context` |
 | Content Quality | `antwork-content` | 20% | `fetch_platform_posts`, `get_post`, `list_posts` |
-| Platform Coverage & Growth | `antwork-growth` | 10% | `list_social_accounts`, `get_post_context` |
+| Platform Coverage & Growth | `antwork-growth` | 10% | `list_social_accounts`, `get_engagement_history` (its `followers` table), `get_post_context` |
 
 Where subagents exist, don't analyze the dimensions inline: the parallel agents are the point. If one agent fails or returns nothing, note the gap and score that dimension conservatively rather than blocking the report.
 
@@ -63,3 +62,4 @@ End by offering to execute the top action immediately through the relevant skill
 - The audit is **read-only**. Never create, edit, schedule, publish, or delete anything during an audit.
 - Metrics refresh every 6 hours on their own; posts published in the last few hours have no numbers yet. Say so instead of scoring them as zero.
 - Quote real numbers from the analytics rows. Never fabricate engagement figures or invent posts that aren't in the data.
+- A blank metric is "not reported", never zero: a null cell in `get_performance` / `get_engagement_history`, or a `get_post` `metricCells` entry whose `state` is not `measured` (`unsupported`, `never_fetched`, `awaiting_permission`, `unreadable`). Don't score a platform down for a metric it cannot report: Instagram and Threads insights may be awaiting Meta's review (`awaitingPermission`), TikTok's analytics scope is in review, X's impressions and link clicks need elevated access, and free-plan X posts are read only at 1, 3 and 7 days. Name these gaps in the report's caveats instead.

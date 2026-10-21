@@ -11,8 +11,8 @@ Generic brainstorming is worthless — the user can get "10 LinkedIn post ideas"
 
 Before generating anything, gather:
 
-1. `get_performance(limit)` — the account's top posts by lifetime engagement. This is the proven lane.
-2. `get_post_context(platform, account_id)` — brand context and up to 15 recent posts with engagement. Those posts are the voice; read them before writing a single hook.
+1. `get_post_context(platform, account_id)` — brand context, up to 15 recent posts with engagement (the voice; read them before writing a single hook), and, once Antwork has measured some, a `performance` block: `topPosts` ranked by the metric that matters on that platform (`rankedBy`: saves on Instagram, link clicks on Pinterest, watch time on YouTube...) over 90 days, plus `followers`. This is the proven lane.
+2. `get_performance(platform=..., days=90)` when you need more than the top few — every published post with saves, link clicks, profile visits, follows and watch time where the platform reports them. A blank is "not reported", not a flop.
 
 If the account is new and has no performance history, say so plainly and ideate from voice + brand + the user's stated goals instead — but don't pretend you're being data-driven when you aren't.
 

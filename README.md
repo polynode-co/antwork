@@ -74,7 +74,7 @@ Install **Antwork** from the MCP servers gallery, or [add it in one click](https
 - Schedule or publish, per account or as a campaign across several accounts.
 - Attach images, video and PDFs, and manage the media library.
 - See the calendar, list and search posts, and retry a failed one.
-- Report engagement: impressions or views, likes, comments, shares and reach, per post and per account.
+- Report performance per post and per account: impressions or views, likes, comments, shares and reach, plus saves, link clicks, profile visits, follows and watch time where the platform reports them, and daily follower counts per connected account. A metric a platform doesn't report shows as blank, never as zero.
 
 Each platform's own rules apply: Instagram and Pinterest need an image or video, TikTok and YouTube need a video, and Instagram needs a Creator or Business account. [Tool reference](https://antwork.io/docs/mcp/tools?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills).
 
@@ -138,12 +138,13 @@ curl -fsSL https://raw.githubusercontent.com/polynode-co/antwork-skills/main/ins
 
 Prefer to clone first? `git clone … && cd antwork-skills && ./install.sh`. Remove everything with `./uninstall.sh`.
 
-#### OpenClaw / ClawHub
+#### OpenClaw
 
-`clawhub/antwork/` is a **self-contained** skill published to [ClawHub](https://clawhub.ai), OpenClaw's skill registry:
+`clawhub/antwork/` is a **self-contained** skill for OpenClaw. A [ClawHub](https://clawhub.ai) listing is coming soon; it is not published there yet, so `clawhub install` won't find it. Until then, install it by hand: copy the folder into your OpenClaw skills directory and connect the server.
 
 ```sh
-clawhub install iker-gonzalez/antwork
+git clone https://github.com/polynode-co/antwork-skills.git
+cp -r antwork-skills/clawhub/antwork ~/.openclaw/skills/antwork
 mcporter config add antwork --url https://api.antwork.io/mcp --auth oauth
 ```
 
@@ -175,7 +176,7 @@ antwork-skills/
 │   ├── antwork-voice/        ├── antwork-analytics/
 │   └── antwork-audit/        # + agents/: the 5 parallel audit subagents
 ├── claude-ai/build.sh        # builds the claude.ai ZIP from skills/
-├── clawhub/                  # self-contained skill published to ClawHub
+├── clawhub/                  # self-contained OpenClaw skill (ClawHub listing coming soon)
 ├── install.sh / uninstall.sh # script-install fallback
 └── README.md / LICENSE
 ```
