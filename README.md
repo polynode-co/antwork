@@ -65,7 +65,7 @@ Install **Antwork** from the MCP servers gallery, or [add it in one click](https
 - **Claude.ai or Claude Desktop:** add `https://api.antwork.io/mcp` as a custom connector. [Step-by-step](https://antwork.io/automate/claude-desktop/linkedin?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills). For the calendar, campaign, analytics and audit workflows, add the [claude.ai skill](#claudeai) too.
 - **Claude Code:** install the plugin below, which connects the server and adds the skills in one step.
 - **ChatGPT:** [setup guide](https://antwork.io/automate/chatgpt?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills).
-- **Cursor:** [setup guide](https://antwork.io/automate/cursor?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills).
+- **Cursor, and Grok Bot through Cursor's catalog:** this repo is also a Cursor plugin (`.cursor-plugin/` and `mcp.json`: the server plus the skills). Until it is listed in the Cursor Marketplace, use the [setup guide](https://antwork.io/automate/cursor?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills), or give Grok Bot the server URL ([guide](https://antwork.io/automate/grok-bot?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills)).
 - **Anything else:** point it at the server URL above. [Full MCP docs](https://antwork.io/docs/mcp?utm_source=github&utm_medium=readme&utm_campaign=antwork_skills).
 
 ### What your assistant can do
@@ -168,6 +168,8 @@ antwork-skills/
 │   ├── plugin.json           # plugin manifest
 │   └── marketplace.json      # self-hosted marketplace (lists this plugin)
 ├── .mcp.json                 # Antwork MCP server — bundled & auto-connected
+├── .cursor-plugin/           # Cursor plugin manifest + single-plugin marketplace
+├── mcp.json                  # the same server, for the Cursor plugin
 ├── skills/                   # router + 8 specialized skills, each with its own templates/
 │   ├── antwork/              # router — /antwork <command>
 │   ├── antwork-ship/         # commits / PRs / releases → posts

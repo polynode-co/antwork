@@ -1,0 +1,15 @@
+{
+  "name": "antwork",
+  "displayName": "Antwork",
+  "version": "1.3.3",
+  "description": "Draft, schedule and publish to Instagram, TikTok, LinkedIn, YouTube, X, Facebook, Threads, Pinterest and Bluesky from chat. Connects the Antwork MCP server (OAuth, no API key) and adds skills for shipping posts, calendars, repurposing, campaigns, analytics and audits.",
+  "author": {
+    "name": "Iker Gonzalez",
+    "email": "iker.gonzalez@antwork.io"
+  },
+  "homepage": "https://antwork.io",
+  "repository": "https://github.com/polynode-co/antwork-skills",
+  "license": "MIT",
+  "keywords": ["antwork", "social-media", "scheduler", "mcp", "instagram", "linkedin", "tiktok", "marketing"],
+  "logo": "assets/icon.png"
+}
