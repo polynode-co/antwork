@@ -1,0 +1,18 @@
+{
+  "name": "antwork",
+  "owner": {
+    "name": "Iker Gonzalez",
+    "email": "iker.gonzalez@antwork.io"
+  },
+  "metadata": {
+    "description": "Antwork for Cursor: the Antwork MCP server and its social-media skills",
+    "version": "1.3.3"
+  },
+  "plugins": [
+    {
+      "name": "antwork",
+      "source": "./",
+      "description": "Draft, schedule and publish social posts from chat through the Antwork MCP server"
+    }
+  ]
+}

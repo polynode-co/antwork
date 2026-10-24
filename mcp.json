@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "antwork": {
+      "url": "https://api.antwork.io/mcp",
+      "headers": {
+        "X-Antwork-Install": "cursor-plugin"
+      }
+    }
+  }
+}
