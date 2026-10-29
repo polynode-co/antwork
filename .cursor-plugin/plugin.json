@@ -8,7 +8,7 @@
     "email": "iker.gonzalez@antwork.io"
   },
   "homepage": "https://antwork.io",
-  "repository": "https://github.com/polynode-co/antwork-skills",
+  "repository": "https://github.com/polynode-co/antwork",
   "license": "MIT",
   "keywords": ["antwork", "social-media", "scheduler", "mcp", "instagram", "linkedin", "tiktok", "marketing"],
   "logo": "assets/logo-plate.png"
