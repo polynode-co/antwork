@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Antwork for Cursor: the Antwork MCP server and its social-media skills",
-    "version": "1.3.4"
+    "version": "1.4.0"
   },
   "plugins": [
     {
