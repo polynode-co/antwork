@@ -12,8 +12,8 @@ Pick your agent. Each line adds the Antwork skills (including [`/antwork ship`](
 
 | Agent | Command |
 |---|---|
-| **Claude Code** (plugin: skills, audit agents and MCP server) | `/plugin marketplace add polynode-co/antwork` then `/plugin install antwork-skills@antwork` |
-| **Codex** (plugin: skills and MCP server) | `codex plugin marketplace add polynode-co/antwork && codex plugin add antwork-skills@antwork && codex mcp login antwork` |
+| **Claude Code** (plugin: skills, audit agents and MCP server) | `/plugin marketplace add polynode-co/antwork` then `/plugin install antwork@antwork` |
+| **Codex** (plugin: skills and MCP server) | `codex plugin marketplace add polynode-co/antwork && codex plugin add antwork@antwork && codex mcp login antwork` |
 | **Any agent, skills only** ([skills CLI](https://skills.sh): Claude Code, Codex, Cursor and others) | `npx skills add polynode-co/antwork` |
 
 The skills CLI installs skills, not MCP servers, so connect the server once yourself:
@@ -123,7 +123,7 @@ This repo is also a Claude Code **plugin marketplace**. Installing the plugin wi
 
 ```sh
 /plugin marketplace add polynode-co/antwork
-/plugin install antwork-skills@antwork
+/plugin install antwork@antwork
 ```
 
 That's it — the [`antwork` MCP server](.mcp.json) connects automatically (complete the OAuth prompt), and the router, 8 skills, and 5 audit agents load. Why the plugin over loose skills: the skills are useless until Antwork's MCP is connected, and the plugin ships that config bundled, so there's no separate connector setup.

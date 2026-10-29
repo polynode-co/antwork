@@ -8,9 +8,9 @@
   "description": "Official Antwork plugins for Claude Code.",
   "plugins": [
     {
-      "name": "antwork-skills",
+      "name": "antwork",
       "source": ".",
-      "description": "Antwork social-media toolkit: router + 8 skills (incl. /antwork ship for build in public) + 5 audit agents, with the Antwork MCP server pre-wired.",
+      "description": "Plan, draft, schedule and publish across 12 networks from chat: Instagram, TikTok, LinkedIn, YouTube, X, Facebook, Threads, Pinterest, Bluesky, Mastodon, Discord and Telegram. Free plan, OAuth sign-in, no API key. Adds skills for content calendars, repurposing one piece across platforms, campaigns, post ideas, brand voice, analytics and audits, plus 5 audit agents.",
       "category": "integration",
       "keywords": [
         "antwork",
