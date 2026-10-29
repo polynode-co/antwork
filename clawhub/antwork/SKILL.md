@@ -101,4 +101,4 @@ Across every voice, skip openers that read as generated: "Here's the thing:", "L
 
 ## More
 
-The full toolkit — 8 specialized skills for calendars, campaigns, repurposing, voice, audits and analytics — is MIT-licensed at https://github.com/polynode-co/antwork-skills.
+The full toolkit — 8 specialized skills for calendars, campaigns, repurposing, voice, audits and analytics — is MIT-licensed at https://github.com/polynode-co/antwork.
