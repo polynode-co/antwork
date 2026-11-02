@@ -5,7 +5,7 @@ description: Use when the user wants to run a multi-post campaign or launch week
 
 # Running a campaign with Antwork
 
-A campaign is a sequence of posts, each bound to one account, all sharing a `campaign_id`, scheduled across days toward a single goal. The work is to design the arc first, get approval, then create and schedule the sequence. This workflow codifies the mistakes assistants make when coordinating multi-post pushes.
+A campaign is a sequence of posts (beats) scheduled across days toward a single goal. Each beat is its own post, with a version per account that carries it; the beats are tied together by the plan and a per-post `goal`, not by a shared id. The work is to design the arc first, get approval, then create and schedule the sequence. This workflow codifies the mistakes assistants make when coordinating multi-post pushes.
 
 ## 1. Define the campaign before drafting
 
@@ -35,12 +35,12 @@ Editing a 7-post plan is far cheaper than editing 7 drafts. Don't call `create_p
 
 ## 4. Create the sequence as one campaign
 
-Let the server mint the `campaign_id`, then reuse it:
+One call per beat:
 
-- The first beat: `create_campaign(variants=[{account_id, text, goal: "<per-post goal>"}, ...])`, one variant per account that carries it. It returns the `campaign_id`.
-- Every later beat: `create_campaign(variants=[...], campaign_id="<that id>")` for a multi-account beat, or `create_post(text, account_id, goal=..., campaign_id="<that id>")` for a single account.
+- A beat on several accounts: `create_post(posts=[{account_id, text, goal: "<per-post goal>"}, ...])`, one entry per account that carries it. Those drafts are one post with a version per account.
+- A beat on one account: `create_post(text, account_id, goal=...)`.
 
-Never invent a `campaign_id`, and never send identical text in every variant: each account gets copy written for it. Hashtags go in one place: write them in `text`, or pass them in `hashtags` (no `#`) and the server appends them to the text, where they count toward the character limit. Never both. On YouTube `hashtags` are video tags instead. Set a meaningful per-post `goal` (e.g. "tease", "launch", "social-proof", "last-call") — it makes later performance analysis legible. Everything is still a DRAFT at this point.
+Don't pass one `campaign_id` across beats: it would make every beat a version of the same post, and the web app would show the whole week as one post. Never send identical text in every entry: each account gets copy written for it. Hashtags go in one place: write them in `text`, or pass them in `hashtags` (no `#`) and the server appends them to the text, where they count toward the character limit. Never both. On YouTube `hashtags` are video tags instead. Set a meaningful per-post `goal` (e.g. "tease", "launch", "social-proof", "last-call") — it makes later performance analysis legible. Everything is still a DRAFT at this point.
 
 Respect hard char limits per platform (X 280, Threads 500, Pinterest 800, IG 2200, LinkedIn 3000, TikTok 2200, YouTube 5000, FB 63206) — scheduling rejects anything over.
 
@@ -53,8 +53,8 @@ For a hard launch moment you want live to the second, publish at the moment inst
 ## 6. Track the campaign as it runs
 
 - `list_posts(status="scheduled")` and `list_posts(group_by_day=true)` — confirm the full arc is queued and see it laid out.
-- `list_posts(campaign_id=...)` pulls exactly the campaign's posts; `list_posts(query=...)` finds posts by keyword.
-- After posts go live, hand off to the `antwork-analytics` skill — filter on the campaign's posts (shared `campaign_id`, per-post `goal`) to measure against the success metric.
+- `list_posts(date_from, date_to)` over the campaign's days pulls its posts (read each one's `goal` to tell the beats apart); `list_posts(query=...)` finds posts by keyword.
+- After posts go live, hand off to the `antwork-analytics` skill — filter on the campaign's posts (its days and per-post `goal`) to measure against the success metric.
 - Any post that failed to publish: `publish_post(post_id)` retries it.
 
 ## 7. Cleanup

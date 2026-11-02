@@ -39,7 +39,8 @@ Applies to every change, by hand or unattended.
   #1437), and on 2026-10-16 `whoami`, `get_workspace_settings`, `get_calendar`,
   `schedule_campaign`, `publish_campaign` and `retry_failed_post` were folded into
   `list_workspaces`, `get_post_context`, `list_posts`, `schedule_post` and `publish_post`,
-  then `disconnect_social_account` went web-only (#1868; 22 tools remain).
+  then `disconnect_social_account` went web-only (#1868), and on 2026-11-02 `create_campaign`
+  was folded into `create_post(posts=[...])` (antwork.io #2425; 22 tools remain).
   Each time these skills went on naming tools that no longer existed.
 - Facts with a source of truth get checked against it, not memory: character limits live in
   `../antwork.io/src/lib/platforms/common/platform-rules.json`.

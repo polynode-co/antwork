@@ -24,4 +24,4 @@ Status legend: `idea` → `draft` → `scheduled` → `published`
 ---
 Fill one row per slot. Space rows across the preferred posting times — don't stack.
 One row = one `create_post` (single account) → `schedule_post(post_id, scheduled_for)`.
-Posts that should run on multiple accounts get one row each, sharing a `campaign_id`.
+A post that runs on several accounts is one row and one `create_post(posts=[...])`, an entry per account.

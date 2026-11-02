@@ -1,6 +1,6 @@
 # Launch Week — {{product / announcement}}
 
-`campaign_id`: {{shared id}} · Launch day: {{date}} · Timezone: {{IANA tz}}
+Launch day: {{date}} · Timezone: {{IANA tz}}
 Goal: {{the one outcome}} · Success metric: {{one number}}
 
 The arc: build tension before, peak on launch day, sustain proof after.
@@ -36,4 +36,4 @@ One slot = one `create_post` (single account) → `schedule_post(post_id, schedu
 
 ---
 Track with `list_posts(status="scheduled")` and `list_posts(group_by_day=true)`. After launch,
-measure the set via `antwork-analytics` (shared `campaign_id`, per-post `goal`).
+measure the set via `antwork-analytics` (the launch days and each post's `goal`).

@@ -5,7 +5,7 @@ description: Use when the user wants to turn ONE piece of source content into pl
 
 # Repurposing one piece into platform-native posts
 
-Antwork binds each post to a single account, and platform is derived from that account. Repurposing means writing a *distinct, native* version per platform — never one body copy-pasted everywhere — and grouping them as one campaign. This workflow codifies the mistakes assistants make when atomizing content.
+Antwork binds each post to a single account, and platform is derived from that account. Repurposing means writing a *distinct, native* version per platform — never one body copy-pasted everywhere — saved as one post with a version per account. This workflow codifies the mistakes assistants make when atomizing content.
 
 ## 1. Anchor the source
 
@@ -41,20 +41,20 @@ Capture the brief in the campaign brief template if the user wants a record of t
 
 Create every variant in one call:
 
-- `create_campaign(variants=[{account_id, text, hashtags?, goal?}, ...])`, one entry per target account, each with its own copy. Hashtags go in one place: write them in `text`, or pass them in `hashtags` (no `#`) and the server appends them to the text, where they count toward the character limit. Never both. On YouTube `hashtags` are video tags instead.
+- `create_post(posts=[{account_id, text, hashtags?, goal?}, ...])`, one entry per target account, each with its own copy. Hashtags go in one place: write them in `text`, or pass them in `hashtags` (no `#`) and the server appends them to the text, where they count toward the character limit. Never both. On YouTube `hashtags` are video tags instead.
 
-It returns the `campaign_id` and one post per account, so the set can be tracked, compared and cleaned up together. A variant that fails validation is reported with its reason and the others are still created. Shared media goes in `media_urls` on the same call. Everything is still a DRAFT; nothing is live yet.
+It returns `postIds`, one post per account, grouped as versions of one post so the set can be tracked, compared and cleaned up together. An entry that fails validation is reported with its reason and the others are still created. Shared media goes in `media_urls` on the same call. Everything is still a DRAFT; nothing is live yet.
 
 ## 5. Present, pick, ship
 
 Show the drafts side by side (platform → variant) and let the user edit or drop any before anything goes out. Ask once for the whole set (publish now, schedule, or keep as drafts), not once per variant, unless the user already said. Then per the user's intent:
 
 - **Schedule, staggered**: `schedule_post(post_id, scheduled_for)` (ISO 8601) per variant, spread across the day/week using the preferred times from `get_post_context`'s `workspace` block rather than firing all variants at once. At most 30 days ahead.
-- **Schedule, all at one time**: `schedule_post(scheduled_for, campaign_id=...)`.
-- **Publish now**: `publish_post(campaign_id=...)`. It publishes the whole set in one call and returns live URLs; report them back, one line per account. Don't call `publish_post` once per variant: each one waits on its platform in turn.
+- **Schedule, all at one time**: `schedule_post(scheduled_for, post_ids=[...])`.
+- **Publish now**: `publish_post(post_ids=[...])`. It publishes the whole set in one call and returns live URLs; report them back, one line per account. Don't call `publish_post` once per variant: each one waits on its platform in turn.
 
 Never claim a variant is "posted" after only `create_post`. Complete the second step.
 
 ## 6. Media carries over, but per platform
 
-If the source has an image or video, attach the right asset to each variant with `add_media` and `attach_to_post_ids` (one call can cover several variants): `media_urls=[...]` for library items, `url=...` for a public or AI-generated image. Use `attach_media(post_id, media_urls)` only to set a post's exact list (reorder, remove, clear). One asset that suits every platform can go in `create_campaign`'s `media_urls` instead. Don't assume one aspect ratio fits every platform; flag when a visual needs reformatting for, e.g., Instagram vs. LinkedIn.
+If the source has an image or video, attach the right asset to each variant with `add_media` and `attach_to_post_ids` (one call can cover several variants): `media_urls=[...]` for library items, `url=...` for a public or AI-generated image. Use `attach_media(post_id, media_urls)` only to set a post's exact list (reorder, remove, clear). One asset that suits every platform can go in `create_post`'s `media_urls` instead. Don't assume one aspect ratio fits every platform; flag when a visual needs reformatting for, e.g., Instagram vs. LinkedIn.

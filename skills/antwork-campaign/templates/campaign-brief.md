@@ -1,7 +1,5 @@
 # Campaign Brief — {{campaign name}}
 
-`campaign_id`: {{shared id grouping every post in this campaign}}
-
 ## Goal
 {{The single outcome this campaign drives — e.g. "300 waitlist signups by launch day."}}
 
@@ -35,5 +33,5 @@
 | 4 | {{...}} | {{...}} | last-call | {{hook}} | last-call |
 
 ---
-Every post shares the `campaign_id` above. Set a meaningful per-post `goal` so
-analytics stays legible. One row = one `create_post` → `schedule_post`.
+Set a meaningful per-post `goal` so analytics stays legible. One row = one
+`create_post` (`posts=[...]` when the row runs on several accounts) → `schedule_post`.
