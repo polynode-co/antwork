@@ -65,7 +65,7 @@ Follow the Antwork drafting protocol exactly:
 3. Write a native version per account. Don't paste one body everywhere: X needs the sharpest line within 280 characters, LinkedIn has room for the lesson (up to 3,000), Threads wants one conversational idea (500). Respect every platform's hard limit.
 4. Create drafts:
    - one development on one account: `create_post(text, account_id)`;
-   - one development on several accounts: `create_campaign(variants=[{account_id, text}, ...])`, one variant per account, each written for that account.
+   - one development on several accounts: `create_post(posts=[{account_id, text}, ...])`, one entry per account, each written for that account.
 
    Both create **drafts only**. Nothing is scheduled or live yet.
 5. Before drafting, `list_posts(query=<feature name>)` for anything already posted about the same development, so you don't announce it twice.
@@ -78,8 +78,8 @@ A post lands harder with a receipt: the release page, the PR, a screenshot of th
 
 ## 6. Schedule or publish, only on an explicit yes
 
-- **Schedule:** the `workspace` block from `get_post_context` for the preferred posting times, `list_posts(date_from, date_to, group_by_day=true)` for the days around them so posts don't stack on one slot, then `schedule_post(post_id, scheduled_for)` or `schedule_post(campaign_id=..., scheduled_for)`. At most 30 days ahead.
-- **Publish now:** `publish_post(post_id)` or `publish_post(campaign_id=...)`.
+- **Schedule:** the `workspace` block from `get_post_context` for the preferred posting times, `list_posts(date_from, date_to, group_by_day=true)` for the days around them so posts don't stack on one slot, then `schedule_post(post_id, scheduled_for)` or `schedule_post(post_ids=[...], scheduled_for)`. At most 30 days ahead.
+- **Publish now:** `publish_post(post_id)` or `publish_post(post_ids=[...])`.
 - **Leave as drafts** if the user hasn't said which.
 
 Offer these three once for the whole set, not after each draft.
