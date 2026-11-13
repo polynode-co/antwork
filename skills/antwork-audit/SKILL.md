@@ -25,11 +25,11 @@ Launch all five in a single batch so they run concurrently. Each is read-only an
 
 | Dimension | Agent | Weight | Primary MCP tools |
 |---|---|---|---|
-| Performance | `antwork-performance` | 30% | `get_performance`, `get_engagement_history`, `get_post_context`, `get_post` |
+| Performance | `antwork-performance` | 30% | `get_performance` (its `daily` and `followers` too), `get_post_context`, `get_post` |
 | Voice Consistency | `antwork-voice-analyst` | 20% | `get_post_context` (per account), `list_posts` |
 | Cadence & Timing | `antwork-cadence` | 20% | `list_posts`, `get_post_context` |
 | Content Quality | `antwork-content` | 20% | `fetch_platform_posts`, `get_post`, `list_posts` |
-| Platform Coverage & Growth | `antwork-growth` | 10% | `list_social_accounts`, `get_engagement_history` (its `followers` table), `get_post_context` |
+| Platform Coverage & Growth | `antwork-growth` | 10% | `list_social_accounts`, `get_performance` (its `followers`), `get_post_context` |
 
 Where subagents exist, don't analyze the dimensions inline: the parallel agents are the point. If one agent fails or returns nothing, note the gap and score that dimension conservatively rather than blocking the report.
 
@@ -62,4 +62,4 @@ End by offering to execute the top action immediately through the relevant skill
 - The audit is **read-only**. Never create, edit, schedule, publish, or delete anything during an audit.
 - Metrics refresh every 6 hours on their own; posts published in the last few hours have no numbers yet. Say so instead of scoring them as zero.
 - Quote real numbers from the analytics rows. Never fabricate engagement figures or invent posts that aren't in the data.
-- A blank metric is "not reported", never zero: a null cell in `get_performance` / `get_engagement_history`, or a `get_post` `metricCells` entry whose `state` is not `measured` (`unsupported`, `never_fetched`, `awaiting_permission`, `unreadable`). Don't score a platform down for a metric it cannot report: Instagram and Threads insights may be awaiting Meta's review (`awaitingPermission`), TikTok's analytics scope is in review, X's impressions and link clicks need elevated access, and free-plan X posts are read only at 1, 3 and 7 days. Name these gaps in the report's caveats instead.
+- A blank metric is "not reported", never zero: a null in `get_performance` (a series day, or a field missing from a post row), or a `get_post` `metricCells` entry whose `state` is not `measured` (`unsupported`, `never_fetched`, `awaiting_permission`, `unreadable`). Don't score a platform down for a metric it cannot report: Instagram and Threads insights may be awaiting Meta's review (`awaitingPermission`), TikTok's analytics scope is in review, X's impressions and link clicks need elevated access, and free-plan X posts are read only at 1, 3 and 7 days. Name these gaps in the report's caveats instead.

@@ -87,9 +87,9 @@ Do not pass `platforms`, `platform_texts`, `tags` or `priority`. The server reje
 
 ## 9. Analytics is tabular
 
-`get_performance` and `get_engagement_history` (pass `post_id` for one post) return `{schema, rows, rowCount}` — you render the table or chart. Metrics refresh every 6 hours on their own, so a post published minutes ago has no numbers yet.
+`get_performance` returns per-post `rows`, `daily` and `followers` as series (`dates` plus one array per platform and metric, or per account; weekly past 31 days) and `findings`; `post_id` gives one post's per-day rows. You render the table or chart; a null in a series is a gap, not a zero. Metrics refresh every 6 hours on their own, so a post published minutes ago has no numbers yet.
 
-Beyond likes, comments, shares and impressions, rows carry `reach`, `saves`, `clicks`, `bookmarks`, `linkClicks`, `profileVisits`, `follows` and `watchTimeSeconds` where the platform reports them. A blank cell means not reported, never zero; `awaitingPermission` names fields a platform hasn't released yet (Instagram and Threads while Meta reviews Antwork's insights access). `impressions` means a different quantity per platform (`reachBasis`), so don't add it across platforms. `get_engagement_history` also returns a `followers` table: daily follower counts per account.
+Beyond likes, comments, shares and impressions, rows carry `reach`, `saves`, `clicks`, `bookmarks`, `linkClicks`, `profileVisits`, `follows` and `watchTimeSeconds` where the platform reports them. A blank cell means not reported, never zero; `awaitingPermission` names fields a platform hasn't released yet (Instagram and Threads while Meta reviews Antwork's insights access). `impressions` means a different quantity per platform (`reachBasis`), so don't add it across platforms. Its `followers` holds the follower counts per account.
 
 ## 10. Confirm destructive operations
 

@@ -30,7 +30,7 @@ elsewhere. Add only the action columns the platform reports.
 
 ## Follower growth
 
-From `get_engagement_history`'s `followers` table (or `list_social_accounts` `followers` for the
+From `get_performance`'s `followers` (and `findings.followers`) (or `list_social_accounts` `followers` for the
 latest count and 30-day change).
 
 | Account | Platform | Start | End | Change | Biggest day (and what went out) |
@@ -39,7 +39,7 @@ latest count and 30-day change).
 
 ## Per-platform trends
 
-From `get_engagement_history` (platformTotals / rangeTotals). Compare `impressions` only within
+From `get_performance`'s `daily` (`changeTotals` and the per-platform `series`). Compare `impressions` only within
 one `reachBasis`.
 
 | Platform | Posts | Total engagement | Actions (link clicks / follows) | Trend | Read |
