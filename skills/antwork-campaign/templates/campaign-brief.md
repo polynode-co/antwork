@@ -4,7 +4,7 @@
 {{The single outcome this campaign drives — e.g. "300 waitlist signups by launch day."}}
 
 ## Success metric
-{{One measurable number, and how it'll be read from get_performance / get_engagement_history.}}
+{{One measurable number, and how it'll be read from get_performance.}}
 
 ## Audience
 {{Who this is for — the reader you're writing every post toward.}}
